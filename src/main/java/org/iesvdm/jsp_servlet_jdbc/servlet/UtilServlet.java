@@ -3,6 +3,7 @@ package org.iesvdm.jsp_servlet_jdbc.servlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.iesvdm.jsp_servlet_jdbc.model.Socio;
 
+import javax.swing.text.html.Option;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,7 +12,6 @@ public class UtilServlet {
     public static Optional<Socio> validaGrabar(HttpServletRequest request) {
 
         //CÓDIGO DE VALIDACIÓN
-        boolean valida = true;
         //int socioID = -1;
         String nombre = null;
         int estatura = -1;
@@ -51,6 +51,34 @@ public class UtilServlet {
         }
         //FIN CÓDIGO DE VALIDACIÓN
         return Optional.empty();
-
     }
+
+    public static boolean validaBorrar(HttpServletRequest request) {
+
+        //CÓDIGO DE VALIDACIÓN
+        boolean valida = false;
+        int socioID = -1;
+
+        try {
+            socioID = Integer.parseInt(request.getParameter("socioID"));
+            valida = true;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //FIN CÓDIGO DE VALIDACIÓN
+        return valida;
+    }
+
+    public static Optional<Socio> validaEditar(HttpServletRequest request) {
+
+        Optional<Socio> optionalSocio = Optional.empty();
+
+        if(validaBorrar(request)){
+
+            optionalSocio = UtilServlet.validaGrabar(request);
+        }
+        return optionalSocio;
+    }
+
 }
