@@ -16,7 +16,7 @@
 
 <%
     Socio socioEditable = (Socio) request.getAttribute("socioEditable");
-    if (socioEditable != null) {
+    //if (socioEditable != null) {
 %>
 
 <div class="container bg-light">
@@ -48,7 +48,7 @@
         </div>
     </form>
     <%
-    }
+    //}
         //                                                 v---- RECOGER MENSAJE DE ERROR DEL ÁMBITO request
         String error = (String) request.getAttribute("error");
 //            v---- SI ESTÁ PRESENTE INFORMAR DEL ERROR

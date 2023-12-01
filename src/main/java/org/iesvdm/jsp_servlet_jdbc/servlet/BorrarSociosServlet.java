@@ -62,6 +62,8 @@ public class BorrarSociosServlet extends HttpServlet {
             List<Socio> listado = this.socioDAO.getAll();
             request.setAttribute("listado", listado);
 
+            request.setAttribute("IDSocioBorrado", numeroSocio);
+
             //POR ÚLTIMO, REDIRECCIÓN INTERNA PARA LA URL /GrabarSocioServlet A pideNumeroSocio.jsp
             //                                                                      |
             //                                                                      V

@@ -12,7 +12,6 @@ public class UtilServlet {
     public static Optional<Socio> validaGrabar(HttpServletRequest request) {
 
         //CÓDIGO DE VALIDACIÓN
-        //int socioID = -1;
         String nombre = null;
         int estatura = -1;
         int edad = -1;
@@ -28,7 +27,6 @@ public class UtilServlet {
             //          -------------------------v                      v---------------------------------------|
             if (request.getParameter("nombre").isBlank()) throw new RuntimeException("Parámetro vacío o todo espacios blancos.");
             nombre = request.getParameter("nombre");
-
 
             estatura = Integer.parseInt(request.getParameter("estatura"));
 

@@ -107,7 +107,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Grabado correctamente socio con ID <%=newSocioID%>
+                Socio con ID <%=newSocioID%> guardado correctamente
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cerrar</button>
@@ -131,7 +131,20 @@
         });
     });
 </script>
-<% } %>
+<% }else{
+            Integer IDSocioBorrado = (Integer) request.getAttribute("IDSocioBorrado");
+
+            if(IDSocioBorrado != null){
+%>
+        <script type="text/javascript">
+                setTimeout(() => alert("Socio con ID <%=IDSocioBorrado%> borrado correctamente"),100);
+        </script>
+
+<%
+                }
+} %>
+
+
 <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
 </body>
 </html>

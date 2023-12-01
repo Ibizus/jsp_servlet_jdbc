@@ -77,6 +77,9 @@ public class EditarSociosServlet extends HttpServlet {
 
             //ACCEDO AL VALOR DE OPTIONAL DE SOCIO
             Socio socioEditado = optionalSocio.get();
+            // TENGO QUE SETEARLE EL ID PORQUE EL OPTIONAL LLEVA -1
+            int numeroSocio = Integer.parseInt(request.getParameter("codigo"));
+            socioEditado.setSocioId(numeroSocio);
 
             //CAMBIO EL SOCIO NUEVO EN BBDD
             this.socioDAO.update(socioEditado);
