@@ -60,7 +60,7 @@ public class UtilServlet {
         int socioID = -1;
 
         try {
-            socioID = Integer.parseInt(request.getParameter("socioID"));
+            socioID = Integer.parseInt(request.getParameter("codigo"));
             valida = true;
 
         } catch (Exception ex) {

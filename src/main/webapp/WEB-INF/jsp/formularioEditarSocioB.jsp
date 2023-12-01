@@ -16,38 +16,39 @@
 
 <%
     Socio socioEditable = (Socio) request.getAttribute("socioEditable");
+    if (socioEditable != null) {
 %>
 
 <div class="container bg-light">
     <form method="post" action="EditarSociosServlet">
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Nombre</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="nombre" value="<%= socioEditable.getNombre()%>>"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="nombre" value="<%= socioEditable.getNombre()%>"/></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Estatura</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="estatura" value="<%= socioEditable.getEstatura()%>>"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="estatura" value="<%= socioEditable.getEstatura()%>"/></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Edad</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="edad" value="<%= socioEditable.getEdad()%>>"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="edad" value="<%= socioEditable.getEdad()%>"/></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Localidad</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="localidad" value="<%= socioEditable.getLocalidad()%>>"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="localidad" value="<%= socioEditable.getLocalidad()%>"/></div>
         </div>
         <div class="row mt-2">
             <div class="col-md-6">
                 &nbsp;
             </div>
             <div class="col-md-6 align-self-center">
-                // Mando el ID del socio oculto para tener todos los datos en el Servlet
                 <input type="hidden" name="codigo" value="<%=socioEditable.getSocioId() %>"/>
-                <input class="btn btn-primary" type="submit" value="Aceptar">
+                <input class="btn btn-primary" type="submit" value="Validar">
             </div>
         </div>
     </form>
     <%
+    }
         //                                                 v---- RECOGER MENSAJE DE ERROR DEL ÁMBITO request
         String error = (String) request.getAttribute("error");
 //            v---- SI ESTÁ PRESENTE INFORMAR DEL ERROR

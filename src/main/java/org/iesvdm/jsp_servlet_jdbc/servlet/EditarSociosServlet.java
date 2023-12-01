@@ -33,18 +33,19 @@ public class EditarSociosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Tengo que añadir el SOCIO en el request para poder mostrarlos desde el formulario de edición:
-        Optional<Socio> optionalSocioEdit = UtilServlet.validaEditar(request);
         Socio socioEditable = null;
+        int numeroSocio = Integer.parseInt(request.getParameter("codigo"));
+
+        Optional<Socio> optionalSocio = this.socioDAO.find(numeroSocio);
 
         //SI OPTIONAL CON SOCIO PRESENTE <--> VALIDA OK
-        if (optionalSocioEdit.isPresent()) {
+        if (optionalSocio.isPresent()) {
 
             //ACCEDO AL VALOR DE OPTIONAL DE SOCIO
-            socioEditable = optionalSocioEdit.get();
+            socioEditable = optionalSocio.get();
         }
-        request.setAttribute("socioEditable", socioEditable);
 
+        request.setAttribute("socioEditable", socioEditable);
 
         //SE TRATA DE UNA REDIRECCIÓN INTERNA EN EL SERVIDOR
         //FIJÉMONOS QUE LA RUTA DE LA JSP HA CAMBIADO A DENTRO DE /WEB-INF/
@@ -67,21 +68,18 @@ public class EditarSociosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = null;
-
-        //CÓDIGO DE VALIDACIÓN ENCAPSULADO EN UN MÉTODO DE UTILERÍA
-        // SI OK ==> OPTIONAL CON SOCIO                 |
-        // SI FAIL ==> EMPTY OPTIONAL                   |
-        //                                              V
+        
+        // valida editar:
         Optional<Socio> optionalSocio = UtilServlet.validaEditar(request);
 
         //SI OPTIONAL CON SOCIO PRESENTE <--> VALIDA OK
         if (optionalSocio.isPresent()) {
 
             //ACCEDO AL VALOR DE OPTIONAL DE SOCIO
-            Socio socio = optionalSocio.get();
+            Socio socioEditado = optionalSocio.get();
 
-            //PERSITO EL SOCIO NUEVO EN BBDD
-            this.socioDAO.update(socio);
+            //CAMBIO EL SOCIO NUEVO EN BBDD
+            this.socioDAO.update(socioEditado);
 
             //CARGO TODO EL LISTADO DE SOCIOS DE BBDD CON EL NUEVO
             List<Socio> listado = this.socioDAO.getAll();
@@ -97,7 +95,7 @@ public class EditarSociosServlet extends HttpServlet {
 
             //ESTABLEZCO EL ATRIBUTO DE newSocioID EN EL ÁMBITO DE REQUEST
             //PARA LANZAR UN MODAL Y UN EFECTO SCROLL EN LA VISTA JSP
-            request.setAttribute("newSocioID", socio.getSocioId() );
+            request.setAttribute("newSocioID", socioEditado.getSocioId() );
 
             //POR ÚLTIMO, REDIRECCIÓN INTERNA PARA LA URL /GrabarSocioServlet A pideNumeroSocio.jsp
             //                                                                      |
