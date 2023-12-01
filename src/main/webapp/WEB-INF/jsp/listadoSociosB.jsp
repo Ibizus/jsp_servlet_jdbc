@@ -136,14 +136,39 @@
 
             if(IDSocioBorrado != null){
 %>
-        <script type="text/javascript">
-                setTimeout(() => alert("Socio con ID <%=IDSocioBorrado%> borrado correctamente"),100);
-        </script>
 
+<div class="modal fade" id="deletedSocioIDModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Borrar Socio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Socio con ID <%=IDSocioBorrado%> borrado correctamente
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //DINAMISMO CON JQUERY..
+    //CUANDO SE CARGA EL DOM JQUERY EJECUTA SOBRE SELECTOR DE CAPA MODAL AL MODAL
+    $(function (){
+        $('#deletedSocioIDModal').modal('show');
+        $('#deletedSocioIDModal').on('click', 'button.close', function (eventObject) {
+            $('#deletedSocioIDModal').modal('hide');
+        });
+    });
+</script>
 <%
-                }
-} %>
-
+            }
+}
+%>
 
 <script type="text/javascript" src="js/bootstrap.bundle.js" ></script>
 </body>
